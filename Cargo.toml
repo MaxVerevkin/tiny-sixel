@@ -1,0 +1,5 @@
+[package]
+name = "tiny-sixel"
+version = "0.1.0"
+authors = ["Max Verevkin <me@maxverevkin.tk>"]
+edition = "2018"
