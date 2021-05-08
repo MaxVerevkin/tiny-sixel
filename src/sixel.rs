@@ -31,8 +31,8 @@ impl Sixel {
 
     pub fn hls(output: &mut impl Write) -> io::Result<()> {
         for i in 0..360 {
-            let col = i;
-            //let col = (i as f64 / 360. * 100.) as i32;
+            //let col = i;
+            let col = (i as f64 / 360. * 100.) as i32;
             output.write_all(format!("#{};1;{};50;100", i, col).as_bytes())?;
         }
         Ok(())
