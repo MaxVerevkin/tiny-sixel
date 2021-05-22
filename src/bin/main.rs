@@ -1,8 +1,5 @@
-mod sixel;
-
 use std::io;
-
-use crate::sixel::Sixel;
+use tiny_sixel::{Sixel, SixelColor};
 
 fn main() {
     // Example drawing
@@ -25,7 +22,11 @@ fn main() {
     let mut stdout = stdout.lock();
 
     Sixel::init(&mut stdout).unwrap();
-    Sixel::hls(&mut stdout).unwrap();
+
+    for i in 0..360 {
+        Sixel::init_color(&mut stdout, i, SixelColor::Hls(i, 50, 100)).unwrap();
+    }
+
     sixel.print(&mut stdout).unwrap();
     Sixel::deinit(&mut stdout).unwrap();
 }
