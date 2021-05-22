@@ -72,6 +72,23 @@ impl Sixel {
         self.buf[x + y * self.width]
     }
 
+    /// Draw a one pixel line from `p1` to `p2`
+    pub fn line(&mut self, p1: (usize, usize), p2: (usize, usize), color_code: u16) {
+        let dx = p2.0 as f64 - p1.0 as f64;
+        let dy = p2.1 as f64 - p1.1 as f64;
+        let len = f64::hypot(dx, dy);
+        let dx = dx / len;
+        let dy = dy / len;
+
+        for i in 0..(len as usize) {
+            self.set(
+                (p1.0 as isize + (dx * i as f64) as isize) as usize,
+                (p1.1 as isize + (dy * i as f64) as isize) as usize,
+                color_code,
+            );
+        }
+    }
+
     /// Print the image
     ///
     /// None that your termainal must alreay be in sixel mode.
